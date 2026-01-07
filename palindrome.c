@@ -1,3 +1,4 @@
+#include<stdio.h>
 int main(){
     int n , orignal , remainder,new_num=0 ;
     printf("Enter the number:");

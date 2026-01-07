@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 int main(){
     int size,sum=0;
     printf("Enter the number of elements :");
