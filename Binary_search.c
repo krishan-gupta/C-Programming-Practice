@@ -4,14 +4,17 @@ int main(){
     printf("Enter number of elements in array:\n");
     scanf("%d",&n);
     int arr[n];
+    
     for(int i=0;i<n;i++){
         printf("Enter element %d of array:",i+1);
         scanf("%d",&arr[i]);
     }
+
     printf("Enter the Target number: \n");
     scanf("%d",&target);
     low = 0;
     high = n-1 ;
+
     while(low<=high){
         int mid = (high + low)/2;
         if (arr[mid]==target){
@@ -28,5 +31,5 @@ int main(){
     if (found==0){
         printf("Element not found");
     }
-    return 0;
+
 }
