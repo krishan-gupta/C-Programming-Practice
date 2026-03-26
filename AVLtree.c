@@ -51,7 +51,7 @@ int max(int a, int b)
     }
 }
 
-struct node *rightRotate(struct node *y)
+struct node *rightrotate(struct node *y)
 {
     struct node *x = y->left;
     struct node *T2 = x->right;
@@ -67,11 +67,11 @@ struct node *rightRotate(struct node *y)
 
 struct node *leftrotate(struct node *x)
 {
-    struct node *y = x->left;
-    struct node *T2 = y->right;
+    struct node *y = x->right;
+    struct node *T2 = y->left;
 
-    x->left = x;
-    y->right = T2;
+    y->left = x;
+    x->right = T2;
 
     x->height = 1 + max(height(x->left), height(x->right));
     y->height = 1 + max(height(y->left), height(y->right));
@@ -84,7 +84,7 @@ void inorder(struct node *root)
     if (root != NULL)
     {
         inorder(root->left);
-        printf("%d", root->data);
+        printf("%d ", root->data);
         inorder(root->right);
     }
 }
@@ -115,24 +115,24 @@ struct node *insert(struct node *node, int key)
 
     // LL
     if (balance > 1 && key < node->left->data)
-        return rightRotate(node);
+        return rightrotate(node);
 
     // RR
     if (balance < -1 && key > node->right->data)
-        return leftRotate(node);
+        return leftrotate(node);
 
     // LR
     if (balance > 1 && key > node->left->data)
     {
-        node->left = leftRotate(node->left);
-        return rightRotate(node);
+        node->left = leftrotate(node->left);
+        return rightrotate(node);
     }
 
     // RL
     if (balance < -1 && key < node->right->data)
     {
-        node->right = rightRotate(node->right);
-        return leftRotate(node);
+        node->right = rightrotate(node->right);
+        return leftrotate(node);
     }
 
     return node;
@@ -141,4 +141,10 @@ struct node *insert(struct node *node, int key)
 int main()
 {
     struct node *node = NULL;
+    node = insert(node, 10);
+    node = insert(node, 20);
+    node = insert(node, 30);
+    node = insert(node, 40);
+
+    inorder(node);
 }
