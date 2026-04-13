@@ -140,6 +140,7 @@ struct node *deletenode(struct node *root, int key)
 
     return root;
 }
+
 int main()
 {
     struct node *root = createnode(20);
@@ -150,5 +151,8 @@ int main()
     insert(root, 70);
     insert(root, 80);
 
+    inorder(root);
+    deletenode(root, 50);
+    printf("\n");
     inorder(root);
 }
