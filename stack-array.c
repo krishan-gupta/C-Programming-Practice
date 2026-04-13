@@ -22,7 +22,7 @@ void push()
 {
     if (top == MAX - 1)
     {
-        printf("Stack Overflow");
+        printf("Stack Overflow\n");
         return;
     }
     else
@@ -62,6 +62,8 @@ void display()
 
 int main()
 {
+    push();
+    push();
     push();
     push();
     push();

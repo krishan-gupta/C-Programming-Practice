@@ -1,23 +1,33 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #define MAX 5
 
-int cqueue[MAX];
-int front = -1;
-int rear = -1;
+int queue[MAX];
+int front = -1, rear = -1;
 
-void enqueue()
+// Check if queue is full
+int isFull()
 {
-    if (front == (rear + 1) % MAX)
+    return (front == (rear + 1) % MAX);
+}
+
+// Check if queue is empty
+int isEmpty()
+{
+    return (front == -1);
+}
+
+// Enqueue operation
+void enqueue(int value)
+{
+    if (isFull())
     {
-        printf("Circular Queue Overflow \n");
+        printf("Queue is Full\n");
         return;
     }
 
-    int x;
-    printf("Enter Element :- ");
-    scanf("%d", &x);
-
-    if (front == -1)
+    if (isEmpty())
     {
         front = rear = 0;
     }
@@ -25,20 +35,25 @@ void enqueue()
     {
         rear = (rear + 1) % MAX;
     }
-    cqueue[rear] = x;
+
+    queue[rear] = value;
+    printf("Inserted: %d\n", value);
 }
 
+// Dequeue operation
 void dequeue()
 {
-    if (front == -1)
+    if (isEmpty())
     {
-        printf("Queue Underflow \n");
+        printf("Queue is Empty\n");
         return;
     }
-    printf("Deleted Element is:- %d\n", cqueue[front]);
+
+    printf("Deleted: %d\n", queue[front]);
 
     if (front == rear)
     {
+        // Only one element
         front = rear = -1;
     }
     else
@@ -47,38 +62,53 @@ void dequeue()
     }
 }
 
+// Peek operation
+void peek()
+{
+    if (isEmpty())
+    {
+        printf("Queue is Empty\n");
+    }
+    else
+    {
+        printf("Front element: %d\n", queue[front]);
+    }
+}
+
+// Display queue
 void display()
 {
-    if (front == -1)
+    if (isEmpty())
     {
-        printf("Queue Empty \n");
+        printf("Queue is Empty\n");
         return;
     }
 
-    printf("Circular Queue Elements are:- ");
-
     int i = front;
+    printf("Queue elements: ");
 
     while (1)
     {
-        printf("%d ", cqueue[i]);
-
+        printf("%d ", queue[i]);
         if (i == rear)
-        {
             break;
-        }
-
         i = (i + 1) % MAX;
     }
+
     printf("\n");
 }
 
+// Main function
 int main()
 {
-    enqueue();
-    enqueue();
-    enqueue();
-    display();
+    int value;
+    printf("Enter value: ");
+    scanf("%d", &value);
+    enqueue(value);
+    enqueue(value);
+    enqueue(value);
     dequeue();
+    peek();
     display();
+    return 0;
 }
