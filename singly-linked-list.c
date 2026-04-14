@@ -51,14 +51,11 @@ void insert_end(struct node **head)
         *head = newnode;
         return;
     }
-
     temp = *head;
-
     while (temp->next != NULL)
     {
         temp = temp->next;
     }
-
     temp->next = newnode;
 }
 
@@ -186,6 +183,7 @@ void delete_pos(struct node **head)
     printf("Deleted Element is %d", del->data);
     free(del);
 }
+
 int main()
 {
     struct node *head = NULL;
