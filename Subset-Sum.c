@@ -4,7 +4,6 @@ int subset[100]; // to store current subset
 
 void subsetSum(int arr[], int n, int index, int current_sum, int target, int size)
 {
-
     // Case 1: Found solution
     if (current_sum == target)
     {
@@ -16,7 +15,6 @@ void subsetSum(int arr[], int n, int index, int current_sum, int target, int siz
         printf("\n");
         return;
     }
-
     // Case 2: Stop conditions
     if (index == n || current_sum > target)
     {

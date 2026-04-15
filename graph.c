@@ -1,6 +1,17 @@
 #include <stdio.h>
 
-int adj[10][10], visited[10], n;
+// 1. Set the number of vertices for the sample graph
+int n = 5;
+
+// 2. Initialize the visited array to 0 directly upon creation
+int visited[10] = {0};
+
+int adj[10][10] = {
+    {0, 1, 1, 0, 0},
+    {1, 0, 0, 1, 1},
+    {1, 0, 0, 0, 1},
+    {0, 1, 0, 0, 0},
+    {0, 1, 1, 0, 0}};
 
 void DFS(int v)
 {
@@ -9,7 +20,7 @@ void DFS(int v)
 
     for (int i = 0; i < n; i++)
     {
-        if (adj[v][i] == 1 && !visited[i])
+        if (adj[v][i] == 1 && visited[i] == 0)
         {
             DFS(i);
         }
@@ -30,7 +41,7 @@ void BFS(int start)
 
         for (int i = 0; i < n; i++)
         {
-            if (adj[v][i] == 1 && !visited[i])
+            if (adj[v][i] == 1 && visited[i] == 0)
             {
                 visited[i] = 1;
                 queue[rear++] = i;
@@ -41,38 +52,16 @@ void BFS(int start)
 
 int main()
 {
-    int edges, u, v;
-
-    printf("Enter number of vertices: ");
-    scanf("%d", &n);
-    printf("Enter number of edges: ");
-    scanf("%d", &edges);
-
-    // Initialize adjacency matrix and visited array
-    for (int i = 0; i < n; i++)
-    {
-        visited[i] = 0;
-        for (int j = 0; j < n; j++)
-            adj[i][j] = 0;
-    }
-
-    printf("Enter edges (u v):\n");
-    for (int i = 0; i < edges; i++)
-    {
-        scanf("%d %d", &u, &v);
-        adj[u][v] = 1;
-        adj[v][u] = 1;
-    }
-
-    printf("\nDFS Traversal: ");
+    printf("DFS Traversal: ");
     DFS(0);
 
-    // CRITICAL: Reset visited array for BFS
+    // Reset the visited array
     for (int i = 0; i < n; i++)
         visited[i] = 0;
 
     printf("\nBFS Traversal: ");
     BFS(0);
+    printf("\n");
 
     return 0;
 }

@@ -141,6 +141,75 @@ struct node *deletenode(struct node *root, int key)
     return root;
 }
 
+void levelOrderTraversal(struct node *root)
+{
+    if (root == NULL)
+        return;
+
+    // Simple array-based queue (assuming max 1000 nodes for demonstration)
+    struct node *queue[1000];
+    int front = 0, rear = 0;
+
+    // Enqueue root
+    queue[rear++] = root;
+
+    while (front < rear)
+    {
+        // Dequeue node and print it
+        struct node *current = queue[front++];
+        printf("%d ", current->data);
+
+        // Enqueue left child
+        if (current->left != NULL)
+        {
+            queue[rear++] = current->left;
+        }
+
+        // Enqueue right child
+        if (current->right != NULL)
+        {
+            queue[rear++] = current->right;
+        }
+    }
+    printf("\n");
+}
+
+int countNodes(struct node *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    return 1 + countNodes(root->left) + countNodes(root->right);
+}
+
+int countLeafNodes(struct node *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    // A leaf node has no left or right children
+    if (root->left == NULL && root->right == NULL)
+    {
+        return 1;
+    }
+    return countLeafNodes(root->left) + countLeafNodes(root->right);
+}
+
+int height(struct node *root)
+{
+    if (root == NULL)
+    {
+        return -1;
+    }
+
+    int leftHeight = height(root->left);
+    int rightHeight = height(root->right);
+
+    return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
+}
+
 int main()
 {
     struct node *root = createnode(20);
